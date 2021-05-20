@@ -1,0 +1,830 @@
+#VRML V2.0 utf8
+
+
+#This project has been done by Jinesh Jain (18075069) and Manav Jain (18074021) as a submission for VRML Assignment Animation
+
+# Stationary Sun
+#NavigationInfo {headlight FALSE}
+
+PointLight {
+	on TRUE
+	intensity 4.0
+	ambientIntensity 2.0
+	color 1 1 1		
+	location 0 0 0
+	attenuation 0 0 0 
+	radius 10000000
+}
+Viewpoint {
+   position 0 0 6500
+}
+
+Sound {
+	source AudioClip { 
+ 		 loop TRUE
+ 	 	 pitch 1.0
+  		 url ["sound.ogg"] # Use .ogg if using view3dscene in Ubuntu
+   		 startTime 0
+	}
+	location 0 0 0
+	intensity 3
+	spatialize TRUE
+}
+
+
+Background {
+  
+  backUrl     "starsbg.png"
+  leftUrl     "starsbg.png"
+  frontUrl    "starsbg.png"
+  rightUrl    "starsbg.png"
+  bottomUrl   "starsbg.png"
+  topUrl      "starsbg.png"  
+}
+
+Transform{
+	translation 0 1800 0 
+	children Shape {
+   		appearance DEF name Appearance { 
+      			material Material { 
+				diffuseColor 1 1 1
+				emissiveColor 1 1 1
+			} 
+   		}
+   		geometry Text {
+      			string [ "Sun" ]
+      			fontStyle FontStyle {
+				size         600		
+				justify      "MIDDLE"			
+			}
+   		}
+	}
+}
+
+Shape {
+ 	appearance DEF White Appearance {
+ 		material Material {
+               		emissiveColor 0.8 0 0
+              		shininess 1
+            	}
+		texture ImageTexture{
+			url "sun.jpeg"
+			repeatS TRUE
+			repeatT TRUE 
+		}	
+ 	}
+ 	geometry Sphere { radius 1800}
+}
+
+# Several orbiting planets
+DEF mercury Transform {
+	translation 2250.0 0.0 0.0
+ 	center -2250.0 0.0 0.0
+ 	children[
+		DEF planet1 Transform{ 
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./mercury.jpg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere { radius 140}
+ 			}
+		},
+		Transform{
+			translation 0 150 0 
+			children Shape {
+   				appearance USE name
+   				geometry Text {
+      					string [ "Mercury" ]
+      					fontStyle FontStyle {
+						size         150		
+						justify      "MIDDLE"			
+					}
+   				}
+			}
+		}	
+	]
+}
+
+DEF venus Transform {
+ 	translation 2500.0 0.0 0.0
+ 	center -2500.0 0.0 0.0
+	children[
+		DEF planet2 Transform{ 
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./venus.jpg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere {radius 200}
+ 			}
+		},
+		Transform{
+			translation 0 250 0 
+			children Shape {
+   				appearance USE name
+   				geometry Text {
+      					string [ "Venus" ]
+      					fontStyle FontStyle {
+						size         200		
+						justify      "MIDDLE"			
+					}
+   				}	
+			}
+		}	
+	]
+},
+
+DEF earth Transform {
+ 	translation 3500 0.0 0.0
+ 	center -3500 0.0 0.0
+	children[
+		DEF planet3 Transform{ 
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./earth.jpeg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere { radius 225 }
+ 			}
+		},
+		Transform{
+			translation 0 250 0 
+			children Shape {
+   				appearance USE name
+   				geometry Text {
+      					string [ "Earth" ]
+      					fontStyle FontStyle {
+						size         200		
+						justify      "MIDDLE"				
+					}
+   				}
+			}
+		}, 
+		DEF moon Transform{ 
+			translation 0 325 0
+			center 0 -325 0
+ 			children [
+				Shape {
+ 					appearance Appearance {
+						material Material { }
+					}	
+ 					geometry Sphere { radius 60 }
+ 				},
+ 				Transform{
+					translation 0 100 0 
+					children Shape {
+   						appearance USE name
+   						geometry Text {
+			      				string [ "Moon" ]
+      							fontStyle FontStyle {
+								size         100		
+								justify      "MIDDLE"				
+							}
+						}
+					}
+				}
+			]	
+		},
+ 		DEF start Transform {
+			translation 0 300 0
+			children[
+				Transform{
+					children Shape {
+		                                appearance Appearance {
+		                                        material Material { 
+								emissiveColor 1 0 0
+								diffuseColor 1 0 0
+							}   
+							texture ImageTexture{
+								url "body.jpg"
+								repeatS TRUE
+								repeatT TRUE 
+							}             
+                		                }
+                		                geometry Cylinder{ 
+						radius 30		
+						height 120
+						}
+                		        }
+				},
+				Transform{
+					translation 0 90 0
+					children Shape {
+                        		        appearance Appearance {
+                        		                material Material { 
+								emissiveColor 255 255 153
+								diffuseColor 255 255 153
+							}   
+							texture ImageTexture{
+								url "leg.jpg"
+								repeatS TRUE
+								repeatT TRUE 
+							}                   
+                        		        }
+                        		 	geometry Cone{
+							bottomRadius 30
+							height 60
+						}
+                        		}
+				},
+				Transform{
+					translation 0 -60 0
+					children Shape {	
+                		                appearance Appearance {
+                		                        material Material { 
+								emissiveColor 255 255 153
+								diffuseColor 255 255 153
+							}   
+							texture ImageTexture{
+								url "bottom.jpeg"
+								repeatS TRUE
+								repeatT TRUE 
+							}                 
+                		                }
+                		         	 geometry Cone{
+							bottomRadius 25
+							height 60
+						}
+                		        }
+				},
+				Transform{
+					translation 40 -50 0
+					children Shape {
+                		                appearance DEF leg Appearance {
+                		                        material Material { 
+								emissiveColor 1 0 0
+								diffuseColor 1 0 0
+							}   
+							texture ImageTexture{
+								url "bodytop.jpg"
+								repeatS TRUE
+								repeatT TRUE 
+							}                 
+                		                }
+                		                geometry DEF legsize Cylinder{ 
+							radius 10	
+							height 60
+						}
+                		        }
+				},
+
+				Transform{	
+					translation 40 -5 0
+					children Shape {
+                		                appearance DEF legtop Appearance {
+                		                        material Material { 
+								emissiveColor 255 255 153
+								diffuseColor 255 255 153
+							}   
+							texture ImageTexture{
+								url "bottom.jpeg"
+								repeatS TRUE
+								repeatT TRUE 
+							}                 
+        		                        }
+        		                        geometry DEF legtopsize Cone{ 
+							bottomRadius 10	
+							height 30
+						}
+        		                }
+				}
+				Transform{
+					translation -40 -50 0
+					children Shape {
+						appearance USE leg
+						geometry USE legsize
+					}
+				},
+				Transform{
+					translation -40 -5 0
+					children Shape {
+						appearance USE legtop
+						geometry USE legtopsize
+					}
+				},
+				Transform{
+					translation 0 -50 -40
+					children Shape {
+						appearance USE leg
+						geometry USE legsize
+					}
+				},
+				Transform{
+					translation 0 -5 40
+					children Shape {
+						appearance USE legtop
+						geometry USE legtopsize
+					}
+				},
+				Transform{
+					translation 0 -50 40
+					children Shape {
+						appearance USE leg
+						geometry USE legsize
+					}
+				},
+				Transform{
+					translation 0 -5 -40
+					children Shape {
+						appearance USE legtop
+						geometry USE legtopsize
+					}
+				},
+			]
+		},		
+
+	]
+},
+         
+
+DEF mars Transform {
+ 	translation 4500.0 0.0 0.0
+ 	center -4500.0 0.0 0.0
+	children[
+		DEF planet4 Transform{ 
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./mars.jpg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere { radius 165 }
+ 			}
+		}
+		Transform{
+			translation 0 150 0 
+			children Shape {
+   				appearance USE name
+   				geometry Text {
+   		 			string [ "Mars" ]
+      					fontStyle FontStyle {
+						size         200		
+						justify      "MIDDLE"				
+					}
+		   		}
+			}
+		}		
+	]	
+},
+		
+DEF jupiter Transform {
+ 	translation 7500 0.0 0.0
+ 	center -7500 0.0 0.0
+	children[
+		DEF planet5 Transform{ 
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./jupiter.jpeg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere { radius 520 }
+ 			}
+		},
+		Transform{
+			translation 0 550 0 
+			children Shape {
+   				appearance USE name 
+   				geometry Text {
+      					string [ "Jupiter" ]
+      					fontStyle FontStyle {
+						size         250
+						justify      "MIDDLE"						
+					}
+   				}
+			}
+		}		
+	]
+},
+
+DEF saturn Transform{
+	translation 9000 0.0 0.0
+	center -9000 0.0 0.0
+	children[
+		DEF planet6 Transform {
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./saturn.jpeg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere { radius 480 }
+ 			}
+		},
+		Transform {
+			rotation 0 1 1 0.55
+ 			children Shape {
+ 				appearance Appearance {
+					material Material {}
+					texture ImageTexture{
+						url "./ring.png"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Cylinder { 
+					height 50
+					radius 800
+				}
+ 			}
+		}
+		Transform{
+			translation 0 530 0 
+			children Shape {
+   				appearance USE name
+   				geometry Text {
+      					string [ "Saturn" ]
+      					fontStyle FontStyle {
+						size         250		
+						justify      "MIDDLE"			
+					}
+   				}
+			}
+		}		
+	]	
+},
+
+DEF uranus Transform {
+ 	translation 10500.0 0.0 0.0
+ 	center -10500.0 0.0 0.0
+	children[
+		DEF planet7 Transform{ 
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./uranus.jpeg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere { radius 375 }
+ 			}
+		},
+		Transform{
+			translation 0 400 0 
+			children Shape {
+   				appearance USE name
+   				geometry Text {
+      					string [ "Uranus" ]
+      					fontStyle FontStyle {
+						size         200		
+						justify      "MIDDLE"				
+					}
+   				}
+			}
+		}	
+	]
+},
+
+DEF neptune Transform {
+ 	translation 12500 0.0 0.0
+	center -12500 0.0 0.0
+	children[
+		DEF planet8 Transform{ 
+ 			children Shape {
+ 				appearance Appearance {
+					material Material { }
+					texture ImageTexture{
+						url "./neptune.jpg"
+						repeatS TRUE
+						repeatT TRUE 
+					}
+				}
+ 				geometry Sphere { radius 325 }
+ 			}
+		},
+		Transform{
+			translation 0 350 0 
+			children Shape {
+   				appearance USE name
+   				geometry Text {
+      					string [ "Neptune" ]
+      					fontStyle FontStyle {
+						size         200		
+						justify      "MIDDLE"			
+					}
+   				}
+			}
+		}		
+	]
+},
+
+
+# Animation clocks, one per planet
+DEF Clock12 TimeSensor {
+ 	cycleInterval 4
+ 	loop TRUE
+}
+
+DEF Clock02 TimeSensor {
+ 	cycleInterval 2
+ 	loop TRUE
+}
+DEF Clock1 TimeSensor {
+ 	cycleInterval 5
+ 	loop TRUE
+}
+
+DEF Clock22 TimeSensor {
+ 	cycleInterval 5
+ 	loop TRUE
+}
+
+DEF Clock2 TimeSensor {
+ 	cycleInterval 7
+ 	loop TRUE
+}
+ 	
+DEF Clock32 TimeSensor {
+ 	cycleInterval 6
+ 	loop TRUE
+}
+	
+DEF Clock3 TimeSensor {
+ 	cycleInterval 11
+ 	loop TRUE
+}
+
+DEF Clock42 TimeSensor {
+ 	cycleInterval 6
+ 	loop TRUE
+}
+
+DEF Clock4 TimeSensor {
+ 	cycleInterval 15
+ 	loop TRUE
+}
+
+DEF Clock5 TimeSensor {
+ 	cycleInterval 20
+ 	loop TRUE
+}
+
+DEF Clock52 TimeSensor {
+ 	cycleInterval 3
+ 	loop TRUE
+}
+
+DEF Clock6 TimeSensor {
+ 	cycleInterval 26
+ 	loop TRUE
+}
+
+DEF Clock62 TimeSensor {
+ 	cycleInterval 4
+ 	loop TRUE
+}
+
+DEF Clock72 TimeSensor {
+ 	cycleInterval 5
+ 	loop TRUE
+}
+
+DEF Clock7 TimeSensor {
+ 	cycleInterval 33
+ 	loop TRUE	
+}
+
+DEF Clock82 TimeSensor {
+ 	cycleInterval 5
+ 	loop TRUE
+}
+
+DEF Clock8 TimeSensor {
+ 	cycleInterval 40
+ 	loop TRUE
+}
+DEF mangaltime TimeSensor { 
+      cycleInterval 30
+      loop TRUE
+} 
+
+
+# Animation paths, one per planet
+DEF mercuryPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+},
+
+DEF planet1path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+},
+
+DEF venusPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+},
+
+DEF planet2path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF earthPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+},
+
+DEF planet3path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+},
+
+DEF marsPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF planet4path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF jupiterPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF planet5path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF saturnPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF planet6path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF uranusPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF planet7path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF neptunePath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+DEF planet8path OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+ 	keyValue [
+ 		0.0 1.0 0.0 0.0,
+ 		0.0 1.0 0.0 3.14,
+ 		0.0 1.0 0.0 6.28
+ 	]
+}
+
+
+DEF mangalscale ScalarInterpolator {
+		key [ 0 0.5 1]
+		keyValue [ 0 1 0]
+}
+
+DEF mangal PositionInterpolator { 
+               key [ 0 0.1 0.75 0.9 1] 
+               keyValue [ 0 300 0, 0 300 0, -3000 2000 0,-3500 1890 0, -3500 1890 0]
+}
+
+DEF moonPath OrientationInterpolator {
+ 	key [ 0.0, 0.50, 1.0 ]
+	keyValue [
+ 		1.0 0.0 0.0 0.0,
+ 		1.0 0.0 0.0 3.14,
+ 		1.0 0.0 0.0 6.28
+ 	]
+}
+
+ROUTE Clock02.fraction_changed TO moonPath.set_fraction
+ROUTE Clock12.fraction_changed TO planet1path.set_fraction
+ROUTE Clock1.fraction_changed TO mercuryPath.set_fraction
+ROUTE Clock22.fraction_changed TO planet2path.set_fraction
+ROUTE Clock2.fraction_changed TO venusPath.set_fraction
+ROUTE Clock32.fraction_changed TO planet3path.set_fraction
+ROUTE Clock3.fraction_changed TO earthPath.set_fraction
+ROUTE Clock42.fraction_changed TO planet4path.set_fraction
+ROUTE Clock4.fraction_changed TO marsPath.set_fraction
+ROUTE Clock52.fraction_changed TO planet5path.set_fraction
+ROUTE Clock5.fraction_changed TO jupiterPath.set_fraction
+ROUTE Clock62.fraction_changed TO planet6path.set_fraction
+ROUTE Clock6.fraction_changed TO saturnPath.set_fraction
+ROUTE Clock72.fraction_changed TO planet7path.set_fraction
+ROUTE Clock7.fraction_changed TO uranusPath.set_fraction
+ROUTE Clock82.fraction_changed TO planet8path.set_fraction
+ROUTE Clock8.fraction_changed TO neptunePath.set_fraction
+
+ROUTE mangaltime.fraction_changed TO mangalscale.set_fraction 
+ROUTE mangalscale.value_changed TO mangal.set_fraction 
+ROUTE mangal.value_changed TO start.set_translation
+
+ROUTE moonPath.value_changed TO moon.set_rotation
+ROUTE planet1path.value_changed TO planet1.set_rotation
+ROUTE mercuryPath.value_changed TO mercury.set_rotation
+ROUTE planet2path.value_changed TO planet2.set_rotation
+ROUTE venusPath.value_changed TO venus.set_rotation
+ROUTE planet3path.value_changed TO planet3.set_rotation
+ROUTE earthPath.value_changed TO earth.set_rotation
+ROUTE planet4path.value_changed TO planet4.set_rotation
+ROUTE marsPath.value_changed TO mars.set_rotation
+ROUTE planet5path.value_changed TO planet5.set_rotation
+ROUTE jupiterPath.value_changed TO jupiter.set_rotation
+ROUTE planet6path.value_changed TO planet6.set_rotation
+ROUTE saturnPath.value_changed TO saturn.set_rotation
+ROUTE planet7path.value_changed TO planet7.set_rotation
+ROUTE uranusPath.value_changed TO uranus.set_rotation
+ROUTE planet8path.value_changed TO planet8.set_rotation
+ROUTE neptunePath.value_changed TO neptune.set_rotation
+
